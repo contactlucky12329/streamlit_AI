@@ -36,6 +36,7 @@ if button1:
 
 if button2:
     label2.text(f"Button2 Clicked")
+    label2.text(f"Button2 Clicked1")
 
 col1, col2, col3 = st.columns(3)
 
