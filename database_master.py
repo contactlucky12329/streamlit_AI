@@ -2,10 +2,6 @@ import pyodbc
 
 import pandas as pd
 
-# Connection strings
-# cn = "DRIVER=SQL Server;SERVER=DESKTOP-DIPRBHN\\MSSQLSERVER1;DATABASE=fyersAlgo;Trusted_Connection=yes;"
-# cn1 = "DRIVER=SQL Server;SERVER=DESKTOP-DIPRBHN\\MSSQLSERVER1;DATABASE=dhanAlgo;Trusted_Connection=yes;"
-# cn2 = 'DRIVER={SQL Server};SERVER=DESKTOP-DIPRBHN\\MSSQLSERVER1;DATABASE=algoMaster;UID=sa;PWD=Lucky;MARS_Connection=Yes'
 cn = 'DRIVER={ODBC Driver 17 for SQL Server};SERVER=DESKTOP-LKV07EB;DATABASE=fyersAlgo;Trusted_Connection=yes;MARS_Connection=Yes'
 cn1 = 'DRIVER={ODBC Driver 17 for SQL Server};SERVER=DESKTOP-LKV07EB;DATABASE=dhanAlgo;Trusted_Connection=yes;MARS_Connection=Yes'
 cn2 = 'DRIVER={ODBC Driver 17 for SQL Server};SERVER=DESKTOP-LKV07EB;DATABASE=algoMaster;Trusted_Connection=yes;MARS_Connection=Yes'
@@ -178,19 +174,3 @@ def get_data_with_parameters(query, params=None):
         print("Error:", e)
 
 
-def insert_live_data_using_pandas(insert_query, row):
-    """
-    Function to insert the DataFrame into SQL Server using pyodbc.
-    """
-    try:
-        if row.empty:
-            print("The DataFrame is empty. No data to insert.")
-            return
-
-        row_tuple = tuple(row)
-        with pyodbc.connect(cn2) as conn2:
-            cursor = conn2.cursor()
-            cursor.execute(insert_query, row_tuple)
-            conn2.commit()
-    except Exception as e:
-        print("Error:", e)
